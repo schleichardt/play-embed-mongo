@@ -1,18 +1,19 @@
 import sbt._
 import Keys._
-import play.Project._
 
 object ApplicationBuild extends Build {
 
-  val appName         = "testApp"
-  val appVersion      = "1.0-SNAPSHOT"
+  val appName = "testApp"
+  val appVersion = "0.1-SNAPSHOT"
 
   val appDependencies = Seq(
     "junit" % "junit-dep" % "4.11" % "test"
+    , "info.schleichardt" %% "play-embed-mongo" % appVersion
+    , "org.mongodb" % "mongo-java-driver" % "2.11.1"
   )
 
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
-    // Add your own project settings here      
+    logBuffered in Test := false
   )
 }

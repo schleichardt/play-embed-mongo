@@ -3,6 +3,20 @@ play-embed-mongo
 
 A play framework module for [Embedded MongoDB](https://github.com/flapdoodle-oss/embedmongo.flapdoodle.de).
 
+This module is a work in progress.
+
+## Usage
+* publish the module local with `sbt publish-local` in the module folder
+* add `"info.schleichardt" %% "play-embed-mongo" % "0.1-SNAPSHOT"` to your `appDependencies` in project/Build.scala
+* add `380:info.schleichardt.play.embed.mongo.EmbedMongoPlugin` to your conf/play.plugins file
+* your conf/application.conf file
+
+```
+embed.mongo.enabled=true
+embed.mongo.port=27017
+embed.mongo.dbversion="2.4.3"
+```
+
 ## Licence
 This software is licensed under the Apache 2 license, quoted below.
 
