@@ -6,7 +6,7 @@ scalaVersion := "2.10.0"
 
 organization := "info.schleichardt"
 
-libraryDependencies += "de.flapdoodle.embed" % "de.flapdoodle.embed.mongo" % "1.28"
+libraryDependencies += "de.flapdoodle.embed" % "de.flapdoodle.embed.mongo" % "1.31"
 
 libraryDependencies += "play" %% "play" % "2.1.0" % "provided"
 

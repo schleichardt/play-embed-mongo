@@ -2,12 +2,12 @@ package info.schleichardt.play.embed.mongo
 
 import play.api.{Logger, Plugin, Application}
 import java.util.logging.{Logger => JLogger}
-import de.flapdoodle.embed.mongo.{MongodStarter, MongodProcess, MongodExecutable}
+import de.flapdoodle.embed.mongo.{Command, MongodStarter, MongodProcess, MongodExecutable}
 import de.flapdoodle.embed.process.distribution.GenericVersion
 import de.flapdoodle.embed.mongo.config.MongodConfig
 import de.flapdoodle.embed.process.runtime.Network
 import java.io.IOException
-import java.net.{BindException, ServerSocket, InetAddress}
+import de.flapdoodle.embed.mongo.config.RuntimeConfigBuilder
 
 /**
  * Provides a MongoDB instance for development and testing.
@@ -20,7 +20,10 @@ class EmbedMongoPlugin(app: Application) extends Plugin {
   override def enabled = app.configuration.getBoolean("embed.mongo.enabled").getOrElse(false)
 
   override def onStart() {
-    val runtime = MongodStarter.getDefaultInstance
+    val runtimeConfig = new RuntimeConfigBuilder()
+      .defaultsWithLogger(Command.MongoD, JLogger.getLogger(getClass().getName()))
+      .build()
+    val runtime = MongodStarter.getInstance(runtimeConfig)
     val keyMongoDbVersion = "embed.mongo.dbversion"
     val versionNumber = app.configuration.getString(keyMongoDbVersion).getOrElse(throw new RuntimeException(s"$keyMongoDbVersion is missing in your configuration"))
     val version = new GenericVersion(versionNumber)
