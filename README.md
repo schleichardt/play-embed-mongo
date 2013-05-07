@@ -2,6 +2,7 @@ play-embed-mongo
 =================
 
 A play framework module for [Embedded MongoDB](https://github.com/flapdoodle-oss/embedmongo.flapdoodle.de).
+It just for setting up a MongoDB for development and testing.
 
 This module is a work in progress.
 
@@ -12,6 +13,7 @@ This module is a work in progress.
 * your conf/application.conf file
 
 ```
+#should be false in production!!!
 embed.mongo.enabled=true
 embed.mongo.port=27017
 embed.mongo.dbversion="2.4.3"

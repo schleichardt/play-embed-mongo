@@ -7,9 +7,10 @@ import de.flapdoodle.embed.process.distribution.GenericVersion
 import de.flapdoodle.embed.mongo.config.MongodConfig
 import de.flapdoodle.embed.process.runtime.Network
 
-/** provides a MongoDB instance for development and testing
-  * Hast to be loaded before any other MongoDB using plugin.
-  */
+/**
+ * Provides a MongoDB instance for development and testing.
+ * Hast to be loaded before any other plugin that connects with MongoDB.
+ */
 class EmbedMongoPlugin(app: Application) extends Plugin {
   private var mongoExe: MongodExecutable = _
   private var process: MongodProcess = _
