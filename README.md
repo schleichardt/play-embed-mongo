@@ -8,7 +8,7 @@ This module is a work in progress.
 
 ## Usage
 * add `"info.schleichardt" %% "play-embed-mongo" % "0.1-SNAPSHOT"` to your `appDependencies` in project/Build.scala
-* add `resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"` to your project/Build.scala
+* add `resolvers += Resolver.sonatypeRepo("snapshots")` to your project/Build.scala
 * add `380:info.schleichardt.play.embed.mongo.EmbedMongoPlugin` to your conf/play.plugins file
 * your conf/application.conf file
 
@@ -19,7 +19,7 @@ embed.mongo.port=27017
 embed.mongo.dbversion="2.4.3"
 ```
 
-* optinally to use a random port: `embed.mongo.port=27017` and put in your Global.scala
+* optinally to use a random port: `embed.mongo.port=0` and put in your Global.scala
 
 ```
 import play.api.GlobalSettings
