@@ -7,6 +7,7 @@ It just for setting up a MongoDB for development and testing.
 This module is a work in progress.
 
 ## Usage
+* the module is hosted on maven central
 * add `"info.schleichardt" %% "play-embed-mongo" % "0.2"` to your `appDependencies` in project/Build.scala
 * add `380:info.schleichardt.play.embed.mongo.EmbedMongoPlugin` to your conf/play.plugins file
 * your conf/application.conf file
@@ -18,7 +19,7 @@ embed.mongo.port=27017
 embed.mongo.dbversion="2.4.3"
 ```
 
-* optinally to use a random port: `embed.mongo.port=0` and put in your Global.scala
+* optionally to use a random port: `embed.mongo.port=0` in your conf/application.conf
 
 ```
 import play.api.GlobalSettings
@@ -26,6 +27,8 @@ import info.schleichardt.play.embed.mongo.DynamicEmbedMongoPort
 
 object Global extends GlobalSettings with DynamicEmbedMongoPort {
   //replace "mongo.client.port" with your settings for your driver
+  //i.e. for Reactive Mongo: import scala.collection.JavaConverters._
+  //Map("mongodb.servers" -> List(s"localhost:$port").asJava)
   override def additionalEmbedMongoPortSettings(port: Int) = Map("mongo.client.port" -> port.toString)
 }
 ```
