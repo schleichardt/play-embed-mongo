@@ -7,8 +7,7 @@ It just for setting up a MongoDB for development and testing.
 This module is a work in progress.
 
 ## Usage
-* add `"info.schleichardt" %% "play-embed-mongo" % "0.1-SNAPSHOT"` to your `appDependencies` in project/Build.scala
-* add `resolvers += Resolver.sonatypeRepo("snapshots")` to your project/Build.scala
+* add `"info.schleichardt" %% "play-embed-mongo" % "0.2"` to your `appDependencies` in project/Build.scala
 * add `380:info.schleichardt.play.embed.mongo.EmbedMongoPlugin` to your conf/play.plugins file
 * your conf/application.conf file
 
