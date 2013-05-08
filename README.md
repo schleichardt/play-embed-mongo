@@ -8,7 +8,7 @@ This module is a work in progress.
 
 ## Usage
 * add `"info.schleichardt" %% "play-embed-mongo" % "0.1-SNAPSHOT"` to your `appDependencies` in project/Build.scala
-* add `resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"` to your project/Build.scala
+* add `resolvers += Resolver.sonatypeRepo("snapshots")` to your project/Build.scala
 * add `380:info.schleichardt.play.embed.mongo.EmbedMongoPlugin` to your conf/play.plugins file
 * your conf/application.conf file
 
