@@ -5,7 +5,7 @@ import java.io.File
 
 trait DynamicEmbedMongoPort extends GlobalSettings {
 
-  def additionalEmbedMongoPortSettings(port: Int) = Map[String, String]()
+  def additionalEmbedMongoPortSettings(port: Int) = Map[String, Any]()
 
   override def onLoadConfig(config: Configuration, path: File, classloader: ClassLoader, mode: Mode.Mode) = {
     val embedMongoActive = config.getBoolean("embed.mongo.enabled").getOrElse(false)
