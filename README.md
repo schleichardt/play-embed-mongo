@@ -2,7 +2,7 @@ play-embed-mongo
 =================
 
 A play framework module for [Embedded MongoDB](https://github.com/flapdoodle-oss/embedmongo.flapdoodle.de).
-It just for setting up a MongoDB for development and testing.
+It just for setting up a MongoDB for development and testing. Compatible with Play 2.1.0.
 
 This module is a work in progress.
 
