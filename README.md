@@ -19,7 +19,7 @@ embed.mongo.port=27017
 embed.mongo.dbversion="2.4.3"
 ```
 
-* optinally to use a random port: `embed.mongo.port=27017` and put in your Global.scala
+* optinally to use a random port: `embed.mongo.port=0` and put in your Global.scala
 
 ```
 import play.api.GlobalSettings
