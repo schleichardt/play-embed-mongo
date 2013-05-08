@@ -53,6 +53,6 @@ class EmbedMongoPlugin(app: Application) extends Plugin {
   }
 }
 
-object EmbedMongoPlugin {
+private[mongo] object EmbedMongoPlugin {
   def freePort() = Network.getFreeServerPort
 }

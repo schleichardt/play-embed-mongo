@@ -19,6 +19,18 @@ embed.mongo.port=27017
 embed.mongo.dbversion="2.4.3"
 ```
 
+* optinally to use a random port: `embed.mongo.port=27017` and put in your Global.scala
+
+```
+import play.api.GlobalSettings
+import info.schleichardt.play.embed.mongo.DynamicEmbedMongoPort
+
+object Global extends GlobalSettings with DynamicEmbedMongoPort {
+  //replace "mongo.client.port" with your settings for your driver
+  override def additionalEmbedMongoPortSettings(port: Int) = Map("mongo.client.port" -> port.toString)
+}
+```
+
 ## Licence
 This software is licensed under the Apache 2 license, quoted below.
 
