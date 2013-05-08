@@ -4,7 +4,7 @@ import Keys._
 object ApplicationBuild extends Build {
 
   val appName = "testApp"
-  val appVersion = "0.1-SNAPSHOT"
+  val appVersion = "0.2-SNAPSHOT"
 
   val appDependencies = Seq(
     "junit" % "junit-dep" % "4.11" % "test"
