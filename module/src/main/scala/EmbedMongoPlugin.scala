@@ -8,6 +8,7 @@ import de.flapdoodle.embed.mongo.config.MongodConfig
 import de.flapdoodle.embed.process.runtime.Network
 import java.io.IOException
 import de.flapdoodle.embed.mongo.config.RuntimeConfigBuilder
+import de.flapdoodle.embed.mongo.config.AbstractMongoConfig.{Timeout, Storage, Net}
 
 /**
  * Provides a MongoDB instance for development and testing.
@@ -29,7 +30,7 @@ class EmbedMongoPlugin(app: Application) extends Plugin {
     val version = new GenericVersion(versionNumber)
     val keyPort = "embed.mongo.port"
     val port = app.configuration.getInt(keyPort).getOrElse(throw new RuntimeException(s"$keyPort is missing in your configuration"))
-    mongoExe = runtime.prepare(new MongodConfig(version, port, Network.localhostIsIPv6()))
+    mongoExe = runtime.prepare(new MongodConfig(version, new Net("localhost", port, Network.localhostIsIPv6()), new Storage, new Timeout))
     Logger.info(s"Starting MongoDB on port $port. This might take a while the first time due to the download of MongoDB.")
     try {
       process = mongoExe.start()

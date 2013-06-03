@@ -1,6 +1,6 @@
 name := "play-embed-mongo"
 
-version := "0.3-SNAPSHOT"
+version := "0.2.1"
 
 scalaVersion := "2.10.0"
 
