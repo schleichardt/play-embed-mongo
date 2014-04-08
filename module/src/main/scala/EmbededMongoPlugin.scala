@@ -1,14 +1,13 @@
-package info.schleichardt.play.embed.mongo
+package play.embed.mongo
 
 import play.api.{Logger, Plugin, Application}
 import java.util.logging.{Logger => JLogger}
 import de.flapdoodle.embed.mongo.{Command, MongodStarter, MongodProcess, MongodExecutable}
-import de.flapdoodle.embed.process.distribution.GenericVersion
-import de.flapdoodle.embed.mongo.config.MongodConfig
+import de.flapdoodle.embed.mongo.config._
 import de.flapdoodle.embed.process.runtime.Network
 import java.io.IOException
-import de.flapdoodle.embed.mongo.config.RuntimeConfigBuilder
-import de.flapdoodle.embed.mongo.config.AbstractMongoConfig.{Timeout, Storage, Net}
+import de.flapdoodle.embed.mongo.distribution.Version
+
 
 /**
  * Provides a MongoDB instance for development and testing.
@@ -25,12 +24,10 @@ class EmbedMongoPlugin(app: Application) extends Plugin {
       .defaultsWithLogger(Command.MongoD, JLogger.getLogger(getClass().getName()))
       .build()
     val runtime = MongodStarter.getInstance(runtimeConfig)
-    val keyMongoDbVersion = "embed.mongo.dbversion"
-    val versionNumber = app.configuration.getString(keyMongoDbVersion).getOrElse(throw new RuntimeException(s"$keyMongoDbVersion is missing in your configuration"))
-    val version = new GenericVersion(versionNumber)
     val keyPort = "embed.mongo.port"
     val port = app.configuration.getInt(keyPort).getOrElse(throw new RuntimeException(s"$keyPort is missing in your configuration"))
-    mongoExe = runtime.prepare(new MongodConfig(version, new Net("localhost", port, Network.localhostIsIPv6()), new Storage, new Timeout))
+    val configBuilder= new MongodConfigBuilder().version(Version.Main.PRODUCTION).net(new Net(port,Network.localhostIsIPv6()))
+    mongoExe = runtime.prepare(configBuilder.build)
     Logger.info(s"Starting MongoDB on port $port. This might take a while the first time due to the download of MongoDB.")
     try {
       process = mongoExe.start()

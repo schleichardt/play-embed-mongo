@@ -1,5 +1,7 @@
-package info.schleichardt.play.embed.mongo
-
+package play.embed.mongo
+/**
+ * Created by canyaman on 08/04/14.
+ */
 import play.api.{Mode, Configuration, GlobalSettings}
 import java.io.File
 
