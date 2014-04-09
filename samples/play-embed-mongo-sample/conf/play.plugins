@@ -1,0 +1,2 @@
+380:play.embed.mongo.EmbedMongoPlugin
+400:play.modules.reactivemongo.ReactiveMongoPlugin
