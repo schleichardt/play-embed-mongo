@@ -6,7 +6,8 @@ import de.flapdoodle.embed.mongo.{Command, MongodStarter, MongodProcess, MongodE
 import de.flapdoodle.embed.mongo.config._
 import de.flapdoodle.embed.process.runtime.Network
 import java.io.IOException
-import de.flapdoodle.embed.mongo.distribution.Version
+import de.flapdoodle.embed.mongo.distribution.{Feature, Versions, Version}
+import de.flapdoodle.embed.process.distribution.GenericVersion
 
 
 /**
@@ -25,8 +26,14 @@ class EmbedMongoPlugin(app: Application) extends Plugin {
       .build()
     val runtime = MongodStarter.getInstance(runtimeConfig)
     val keyPort = "embed.mongo.port"
+    val keyMongoDbVersion = "embed.mongo.dbversion"
+    val versionNumber = app.configuration.getString(keyMongoDbVersion).getOrElse(throw new RuntimeException(s"$keyMongoDbVersion is missing in your configuration"))
+    val version = Versions.withFeatures(new GenericVersion(versionNumber),Feature.SYNC_DELAY)
     val port = app.configuration.getInt(keyPort).getOrElse(throw new RuntimeException(s"$keyPort is missing in your configuration"))
-    val configBuilder= new MongodConfigBuilder().version(Version.Main.PRODUCTION).net(new Net(port,Network.localhostIsIPv6()))
+    val configBuilder= new MongodConfigBuilder()
+      .version(version)
+      .net(new Net(port,Network.localhostIsIPv6()))
+
     mongoExe = runtime.prepare(configBuilder.build)
     Logger.info(s"Starting MongoDB on port $port. This might take a while the first time due to the download of MongoDB.")
     try {
